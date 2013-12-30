@@ -1,7 +1,7 @@
 require "link_checker/version"
 require "resolver"
 require "extractor"
-require 'pp'
+require "set"
 
 module LinkChecker
   class Spider
