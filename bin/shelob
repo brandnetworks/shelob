@@ -3,8 +3,10 @@
 require 'optparse'
 require 'shelob'
 
-def main args
+def main args, options
   puts Shelob::Spider.new(args[0], verbose: options[:verbose]).check
+
+  0
 end
 
 options = {verbose: 0}
@@ -31,7 +33,7 @@ if ARGV.empty?
 end
 
 begin
-  exit main(ARGV)
+  exit main(ARGV, options)
 rescue => ex
   STDERR.puts ex.message
 end
