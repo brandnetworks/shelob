@@ -4,6 +4,7 @@ require 'link_result'
 describe LinkResult, "Link fetch result" do
   before do
     @result = LinkResult.new("http://google.com", 200, '<html><head><title>hi</title></head><body><a href="http://bing.com">bing</a><a href="http://yahoo.com">yahoo</a></body></html>')
+    @failed = LinkResult.new("http://google.com", 404, 'Not found')
   end
 
   describe "when created" do
@@ -23,6 +24,11 @@ describe LinkResult, "Link fetch result" do
 
     it "should have a clean string rep" do
       @result.to_s.must_equal "200: http://google.com"
+    end
+
+    it "should determine if a request is failed" do
+      @result.failed.must_equal false
+      @failed.failed.must_equal true
     end
   end
 end

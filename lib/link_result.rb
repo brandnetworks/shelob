@@ -10,4 +10,8 @@ class LinkResult
   def to_s
     "#{@status}: #{@url}"
   end
+
+  def failed
+    @status.to_i >= 400
+  end
 end
