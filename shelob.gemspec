@@ -6,6 +6,7 @@ require 'shelob/version'
 Gem::Specification.new do |spec|
   spec.name          = "shelob"
   spec.version       = Shelob::VERSION
+  spec.homepage      = 'https://github.com/bmnick/shelob'
   spec.authors       = ["Benjamin Nicholas"]
   spec.email         = ["bnicholas@brandnetworksinc.com"]
   spec.description   = %q{A giant spider that starts on a given page, finds all links on the page, ensure they resolve, and recurses if the link is underneath the starting url}
