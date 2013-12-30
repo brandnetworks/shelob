@@ -14,7 +14,7 @@ end
 
 describe Shelob::Spider, "Link checking spider" do
   before do
-    stub_request(:any, 'http://bmnick.com/resume').to_return(body: '<html><head><title>resume</title></head><body><a href="http://bmnick.com">home</a><a href="http://bmnick.com/resume/resume.pdf">pdf</a><a href="http://bmnick.com/resume/secret"</body></html>')
+    stub_request(:any, 'http://bmnick.com/resume').to_return(body: '<html><head><title>resume</title></head><body><a href="http://bmnick.com">home</a><a href="http://bmnick.com/resume/resume.pdf">pdf</a><a href="http://bmnick.com/resume/secret"</body></html>').times(1).then.to_return(status: 514)
     stub_request(:any, 'http://bmnick.com/').to_return(status: 200, body: '<html><head><title>pdf</title></head><body><a href="http://bmnick.com/resume/">resume</a><a href="http://bmnick.com/">home</a><a href="http://bmnick.com/resume/secret">no touchy!</a></body></html>')
     stub_request(:any, 'http://bmnick.com/resume/secret').to_return(body: '<html><head><title>secrets</title></head><body><a href="http://bmnick.com/resume/boring">boredom</a><a href="http://bmnick.com/resume">resume</a><a href="/resume/relative">relative</a></body></html>"')
     stub_request(:any, 'http://bmnick.com/resume/resume.pdf').to_return(status: 404)

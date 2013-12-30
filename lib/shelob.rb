@@ -10,7 +10,7 @@ module Shelob
     def initialize hostname, options = {}
       @hostname = hostname
       @queue = [ hostname ]
-      @urls = Set.new @queue
+      @urls = Set.new
       @failures = []
       @verbose = options[:verbose] == 1 ? true : false
       @chatty = options[:verbose] == 2 ? true : false
@@ -19,7 +19,8 @@ module Shelob
     def check
       while not @queue.empty?
         url = @queue.shift
-        @urls << url
+
+        next if @urls.include? url
 
         if @verbose
           print '.'
@@ -35,8 +36,10 @@ module Shelob
 
         links = Extractor.new(fetch).extract
 
+        @urls << url
+
         filtered = links.select do |link| 
-          link.start_with? @hostname and !@urls.include? link
+          link.start_with? @hostname
         end
 
         if @chatty
