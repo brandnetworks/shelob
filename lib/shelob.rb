@@ -1,9 +1,9 @@
-require "link_checker/version"
+require "shelob/version"
 require "resolver"
 require "extractor"
 require "set"
 
-module LinkChecker
+module Shelob
   class Spider
     attr_accessor :hostname
 

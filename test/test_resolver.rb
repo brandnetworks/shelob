@@ -5,16 +5,16 @@ require 'link_result'
 
 WebMock.allow_net_connect!
 
-describe LinkChecker::Resolver, "Link fetching module" do 
+describe Shelob::Resolver, "Link fetching module" do 
   describe "when created" do
     it "should be created with a url" do
-      LinkChecker::Resolver.new("http://bmnick.com/ruby-c-extensions") 
+      Shelob::Resolver.new("http://bmnick.com/ruby-c-extensions") 
     end
   end
 
   describe "when used" do
     before do
-      @resolver = LinkChecker::Resolver.new("http://bmnick.com/ruby-c-extensions")
+      @resolver = Shelob::Resolver.new("http://bmnick.com/ruby-c-extensions")
       @result = @resolver.resolve
     end
 

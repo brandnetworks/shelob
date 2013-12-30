@@ -1,7 +1,7 @@
 require 'link_result'
 require 'net/http'
 
-module LinkChecker
+module Shelob
   class Resolver
     def initialize url
       @uri = URI(url)

@@ -1,18 +1,18 @@
 require 'minitest/autorun'
 require 'webmock/minitest'
-require 'link_checker'
+require 'shelob'
 
 # Stub out requests
 
-describe LinkChecker, "Link checking module" do
+describe Shelob, "Link checking module" do
   describe "when created" do
     it "should exist" do
-      LinkChecker.wont_be_nil
+      Shelob.wont_be_nil
     end
   end
 end
 
-describe LinkChecker::Spider, "Link checking spider" do
+describe Shelob::Spider, "Link checking spider" do
   before do
     stub_request(:any, 'http://bmnick.com/resume').to_return(body: '<html><head><title>resume</title></head><body><a href="http://bmnick.com">home</a><a href="http://bmnick.com/resume/resume.pdf">pdf</a><a href="http://bmnick.com/resume/secret"</body></html>')
     stub_request(:any, 'http://bmnick.com/').to_return(status: 200, body: '<html><head><title>pdf</title></head><body><a href="http://bmnick.com/resume/">resume</a><a href="http://bmnick.com/">home</a><a href="http://bmnick.com/resume/secret">no touchy!</a></body></html>')
@@ -23,10 +23,10 @@ describe LinkChecker::Spider, "Link checking spider" do
   end
   describe "when created" do
     it "should exist" do
-      LinkChecker::Spider.wont_be_nil
+      Shelob::Spider.wont_be_nil
     end
     it "should store the initial url" do
-      spider = LinkChecker::Spider.new("https://openforum.com")
+      spider = Shelob::Spider.new("https://openforum.com")
       spider.wont_be_nil
       spider.hostname.must_equal "https://openforum.com"
     end
@@ -34,7 +34,7 @@ describe LinkChecker::Spider, "Link checking spider" do
   describe "when checking links" do
     before do
 
-      @spider = LinkChecker::Spider.new("http://bmnick.com/resume")
+      @spider = Shelob::Spider.new("http://bmnick.com/resume")
       @results = @spider.check
     end
 

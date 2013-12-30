@@ -1,15 +1,15 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require 'link_checker'
+require 'shelob'
 
 def main args
-  puts LinkChecker::Spider.new(args[0], verbose: options[:verbose]).check
+  puts Shelob::Spider.new(args[0], verbose: options[:verbose]).check
 end
 
 options = {verbose: 0}
 optparse = OptionParser.new do |opts|
-  opts.banner = "Usage: link_checker [options] root_url"
+  opts.banner = "Usage: shelob [options] root_url"
 
   opts.on('-v', "--[no-]verbose", "Print simple information(overrides -r)") do
     options[:verbose] = 1

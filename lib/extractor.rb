@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'nokogiri'
 
-module LinkChecker
+module Shelob
   class Extractor
     def initialize fetched
       @fetched = fetched
