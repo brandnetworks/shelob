@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'link_checker'
+puts LinkChecker::Spider.new(ARGV[0]).check
