@@ -10,7 +10,7 @@ module LinkChecker
     def initialize hostname
       @hostname = hostname
       @queue = [ hostname ]
-      @urls = Set.new @queue
+      @urls = ::Set.new @queue
       @failures = []
     end
 
