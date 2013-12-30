@@ -26,9 +26,9 @@ describe Shelob::Spider, "Link checking spider" do
       Shelob::Spider.wont_be_nil
     end
     it "should store the initial url" do
-      spider = Shelob::Spider.new("https://openforum.com")
+      spider = Shelob::Spider.new("http://bmnick.com")
       spider.wont_be_nil
-      spider.hostname.must_equal "https://openforum.com"
+      spider.hostname.must_equal "http://bmnick.com"
     end
   end
   describe "when checking links" do
