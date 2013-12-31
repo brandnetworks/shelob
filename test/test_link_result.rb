@@ -27,8 +27,8 @@ describe LinkResult, "Link fetch result" do
     end
 
     it "should determine if a request is failed" do
-      @result.failed.must_equal false
-      @failed.failed.must_equal true
+      @result.failed?.must_equal false
+      @failed.failed?.must_equal true
     end
   end
 end

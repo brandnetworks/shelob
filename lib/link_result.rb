@@ -11,7 +11,7 @@ class LinkResult
     "#{@status}: #{@url}"
   end
 
-  def failed
+  def failed?
     @status.to_i >= 400
   end
 end

@@ -100,7 +100,7 @@ module Shelob
     def fetch url
       page = Resolver.new(url).resolve
 
-      @failures << page if page.failed
+      @failures << page if page.failed?
 
       page
     end
