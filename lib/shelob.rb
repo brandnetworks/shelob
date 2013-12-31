@@ -12,12 +12,17 @@ module Shelob
     # underneath
     attr_accessor :hostname
 
+    # The current queue of urls to check
+    attr_accessor :queue
+
     # Create a new spider with the given hostname and
     # options
     #
     # Valid options:
-    # * Verbose: 0 for no output, 1 for progress output, 2
-    # for verbose output
+    # * verbose: 0 for no output, 1 for progress output, 2
+    #   for verbose output
+    # * seed: Provide an initial seed value, other than the
+    #   root url you're providing
     def initialize hostname, options = {}
       # Data
       @hostname = hostname
@@ -27,7 +32,11 @@ module Shelob
       @chatty = options[:verbose] == 2 ? true : false
 
       # Internal
-      @queue = [ hostname ]
+      if options[:seed].nil?
+        @queue = [ hostname ]
+      else
+        @queue = [ options[:seed] ]
+      end
     end
 
     # Notify that a url is about to be processed. Currently

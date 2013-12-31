@@ -30,6 +30,12 @@ describe Shelob::Spider, "Link checking spider" do
       spider.wont_be_nil
       spider.hostname.must_equal "http://bmnick.com"
     end
+    it "should be able to take a seperate seed url" do
+      spider = Shelob::Spider.new("http://bmnick.com", seed: "http://bmnick.com/resume")
+      spider.wont_be_nil
+      spider.hostname.must_equal "http://bmnick.com"
+      spider.queue.must_include "http://bmnick.com/resume"  
+    end
   end
   describe "when checking links" do
     before do
