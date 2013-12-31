@@ -39,6 +39,46 @@ module Shelob
       end
     end
 
+    # Entry point to the main spider process. This is the
+    # main API point, and will return once the site has
+    # been completely spidered.
+    #
+    # Returns a list of all failed urls, and their
+    # particular error code (404, 500, etc.)
+    def check
+      # set up variables
+      @urls ||= Set.new
+      @failures ||= []
+
+      # kick the spider off
+      run_spider
+
+      @failures
+    end
+
+    # Returns a count of the remaining urls to parse - this
+    # number is only a view of the current state, as more
+    # urls are constantly being added as other urls
+    # resolve.
+    #
+    # This would only be useful to call from another thread
+    # at this time, as check is a blocking call
+    def remaining
+      return @queue.count
+    end
+
+    # Return the total number of urls that were fetched in
+    # the spidering process.
+    def requests
+      return @urls.count
+    end
+
+    # Return an array of all urls that were fetched in the
+    # process of spidering the site.
+    def fetched
+      return @urls
+    end
+
     # Notify that a url is about to be processed. Currently
     # only used to print status
     def pre_process_notify url
@@ -120,46 +160,6 @@ module Shelob
 
         post_process_notify url
       end
-    end
-
-    # Entry point to the main spider process. This is the
-    # main API point, and will return once the site has
-    # been completely spidered.
-    #
-    # Returns a list of all failed urls, and their
-    # particular error code (404, 500, etc.)
-    def check
-      # set up variables
-      @urls ||= Set.new
-      @failures ||= []
-
-      # kick the spider off
-      run_spider
-
-      @failures
-    end
-
-    # Returns a count of the remaining urls to parse - this
-    # number is only a view of the current state, as more
-    # urls are constantly being added as other urls
-    # resolve.
-    #
-    # This would only be useful to call from another thread
-    # at this time, as check is a blocking call
-    def remaining
-      return @queue.count
-    end
-
-    # Return the total number of urls that were fetched in
-    # the spidering process.
-    def requests
-      return @urls.count
-    end
-
-    # Return an array of all urls that were fetched in the
-    # process of spidering the site.
-    def fetched
-      return @urls
     end
   end
 end
