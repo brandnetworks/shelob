@@ -5,7 +5,7 @@ require 'shelob'
 require 'shelob/version'
 
 def main args, options
-  puts Shelob::Spider.new(args[0], verbose: options[:verbose]).check
+  puts Shelob::Spider.new(args[0], options).check
 
   0
 end
@@ -20,6 +20,10 @@ optparse = OptionParser.new do |opts|
 
   opts.on('-r', '--[no-]really-verbose', "Print lots of information(overrides -v)") do
     options[:verbose] = 2
+  end
+
+  opts.on('-s', '--seed SEED_URL', "Initial seed url if different from root url") do |seed|
+    options[:seed] = seed
   end
   
   opts.on_tail('-h', '--help', 'Show this message') do
