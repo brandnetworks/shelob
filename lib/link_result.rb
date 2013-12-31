@@ -7,8 +7,12 @@ class LinkResult
     @body = body
   end
 
+  def pretty_status
+    @status == 900 ? 'Exception' : @status
+  end
+
   def to_s
-    "#{@status}: #{@url}"
+    "#{pretty_status}: #{@url}"
   end
 
   def failed?

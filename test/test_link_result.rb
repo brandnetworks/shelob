@@ -30,6 +30,16 @@ describe LinkResult, "Link fetch result" do
       @result.failed?.must_equal false
       @failed.failed?.must_equal true
     end
+
+  end
+
+  describe "exception cases" do
+
+    it "should be aware of the 900 = Exception rule in to_s" do
+      res = LinkResult.new("http://google.com/bad uri", 900, 'undefined local variable or method `url` for blah')
+      res.to_s.must_equal 'Exception: http://google.com/bad uri'
+    end
+
   end
 end
 
