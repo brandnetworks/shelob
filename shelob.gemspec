@@ -18,12 +18,16 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  # Automation
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "minitest"
-  spec.add_development_dependency "webmock"
-  spec.add_development_dependency "guard"
-  spec.add_development_dependency "guard-minitest"
+  spec.add_development_dependency "rake", "~> 10.1"
+  spec.add_development_dependency "guard", "~> 2.2"
+  spec.add_development_dependency "guard-minitest", "~> 2.1"
 
-  spec.add_runtime_dependency     "nokogiri"
+  # Testing tools
+  spec.add_development_dependency "minitest", "~> 5.2"
+  spec.add_development_dependency "webmock", "~> 1.16"
+
+  # Runtime dependencies
+  spec.add_runtime_dependency     "nokogiri", "~> 1.6"
 end
