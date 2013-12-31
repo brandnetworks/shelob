@@ -10,6 +10,12 @@ describe Shelob::Resolver, "Link fetching module" do
     it "should be created with a url" do
       Shelob::Resolver.new("http://bmnick.com/ruby-c-extensions") 
     end
+
+    it "should return an error result for bad URIs" do
+      resolver = Shelob::Resolver.new("http://bmnick.com/bad uri")
+      res = resolver.resolve
+      res.failed?
+    end 
   end
 
   describe "when used" do
