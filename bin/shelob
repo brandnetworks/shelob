@@ -14,8 +14,11 @@ end
 version Shelob::VERSION
 description "Spider a site and check for any errors"
 
+options[:throttle] = 6000 # default to a giant number of requests
+
 arg :root_url, :required
 on "-s SEED", "--seed", "Initial seed url if different from root url"
+on "-t THROTTLE", "--throttle", "Number of requests/minute to throttle the spider down to", Integer
 
 # Set up verbosity levels
 on( "-v", "--verbose", "Print simple information(overrides -V)" ) { options[:verbose] = 1 }

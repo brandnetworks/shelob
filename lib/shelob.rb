@@ -23,6 +23,8 @@ module Shelob
     #   for verbose output
     # * seed: Provide an initial seed value, other than the
     #   root url you're providing
+    # * throttle: Throttle requests down to x requests per 
+    #   minute
     def initialize hostname, options = {}
       # Data
       @hostname = hostname
@@ -30,6 +32,7 @@ module Shelob
       # Options
       @verbose = options[:verbose] == 1 ? true : false
       @chatty = options[:verbose] == 2 ? true : false
+      @throttle = 60 / options[:throttle]
 
       # Internal
       if options[:seed].nil?
@@ -154,6 +157,8 @@ module Shelob
 
         next if @urls.include? url
 
+        sleep @throttle
+        
         pre_process_notify url
 
         process url
