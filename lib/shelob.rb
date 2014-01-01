@@ -32,7 +32,7 @@ module Shelob
       # Options
       @verbose = options[:verbose] == 1 ? true : false
       @chatty = options[:verbose] == 2 ? true : false
-      @throttle = 60 / options[:throttle]
+      @throttle = options[:throttle] ? 60 / options[:throttle] : 0
 
       # Internal
       if options[:seed].nil?
@@ -158,7 +158,7 @@ module Shelob
         next if @urls.include? url
 
         sleep @throttle
-        
+
         pre_process_notify url
 
         process url
