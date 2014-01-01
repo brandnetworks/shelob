@@ -13,6 +13,8 @@ You can also use the link resolver, extractor, or the spider itself programmatic
 
 ## Installation
 
+Shelob requires Ruby 1.9.3 or newer. Hopefully this isn't a problem, but if so, check out RVM!
+
 Add this line to your application's Gemfile:
 
     gem 'shelob'
