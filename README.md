@@ -1,5 +1,7 @@
 # Shelob
 
+[![Build Status](https://travis-ci.org/bmnick/shelob.png)](https://travis-ci.org/bmnick/shelob)
+
 Shelob is a giant spider that starts on a given page, finds all links on the page, ensure they resolve, and recurses if the link is underneath the starting url. Intended primarily for double checking that your site has no horrible error pages to be exposed to the user by clicking on a link. 
 
 ## Usage
