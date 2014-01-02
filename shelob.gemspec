@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
 
   # Runtime dependencies
   spec.add_runtime_dependency     "nokogiri", "~> 1.6"
+  spec.add_runtime_dependency     "methadone", "~> 1.3"
 end

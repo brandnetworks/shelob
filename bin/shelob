@@ -1,49 +1,25 @@
 #!/usr/bin/env ruby
 
-require 'optparse'
 require 'shelob'
 require 'shelob/version'
+require 'methadone'
 
-def main args, options
-  puts Shelob::Spider.new(args[0], options).check
+include Methadone::Main
+include Methadone::CLILogging
 
-  0
+main do |root_url|
+  puts Shelob::Spider.new(root_url, options).check
 end
 
-options = {verbose: 0}
-optparse = OptionParser.new do |opts|
-  opts.banner = "Usage: shelob [options] root_url"
+version Shelob::VERSION
+description "Spider a site and check for any errors"
 
-  opts.on('-v', "--[no-]verbose", "Print simple information(overrides -r)") do
-    options[:verbose] = 1
-  end
+arg :root_url, :required
+on "-s SEED", "--seed", "Initial seed url if different from root url"
 
-  opts.on('-r', '--[no-]really-verbose', "Print lots of information(overrides -v)") do
-    options[:verbose] = 2
-  end
+# Set up verbosity levels
+on( "-v", "--verbose", "Print simple information(overrides -V)" ) { options[:verbose] = 1 }
+on( "-V", "--[no-]very-verbose", "Print lots of information(overrides -v)" ) { options[:verbose] = 2 }
 
-  opts.on('-s', '--seed SEED_URL', "Initial seed url if different from root url") do |seed|
-    options[:seed] = seed
-  end
-  
-  opts.on_tail('-h', '--help', 'Show this message') do
-    puts opts
-    exit
-  end
-
-  opts.on_tail('--version', 'Show version') do
-    puts Shelob::VERSION
-  end
-end.parse!
-
-if ARGV.empty?
-  puts optparse
-  exit 1
-end
-
-begin
-  exit main(ARGV, options)
-rescue => ex
-  STDERR.puts ex.message
-end
+go!
 
